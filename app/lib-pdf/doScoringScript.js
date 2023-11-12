@@ -164,7 +164,7 @@ main = async function () {
         }
 
         let commentInput = $(`.ivu-input-type-textarea textarea`)
-        while (commentInput.val() !== comment + '') {
+        while (commentInput.val().trim() !== (comment + '').trim()) {
             commentInput.val(comment)
 
             commentInput[0].dispatchEvent(eventInput)
