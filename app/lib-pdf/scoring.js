@@ -1,5 +1,5 @@
 // const ShellSpawn = require('./lib/ShellSpawn')
-const GetExistedArgv = require('./lib/GetExistedArgv')
+const GetExistedArgv = require('../lib/GetExistedArgv')
 
 const path = require('path')
 const fs = require('fs')
@@ -7,30 +7,30 @@ const fs = require('fs')
 // const ExtractAnnotation = require('./lib-pdf/ExtractAnnotation.js')
 // const SplitPDF = require('./lib-pdf/SplitPDF.js')
 
-let main = async function () {
-  let files = GetExistedArgv()
+// let main = async function () {
+//   let files = GetExistedArgv()
 
-  for (let i = 0; i < files.length; i++) {
-    let file = files[i]
-    if (file.endsWith('.anno.txt') === false) {
-      continue
-    }
+//   for (let i = 0; i < files.length; i++) {
+//     let file = files[i]
+//     if (file.endsWith('.anno.txt') === false) {
+//       continue
+//     }
 
-    let filename = path.basename(file)
-    let filenameNoExt = filename
-    if (filenameNoExt.endsWith('.anno.txt')) {
-      filenameNoExt = filenameNoExt.slice(0, -4)
-    }
+//     let filename = path.basename(file)
+//     let filenameNoExt = filename
+//     if (filenameNoExt.endsWith('.anno.txt')) {
+//       filenameNoExt = filenameNoExt.slice(0, -4)
+//     }
 
-    // -----------------------
+//     // -----------------------
 
-    let annotations = fs.readFileSync(file, 'utf-8')
-    // console.log(annotations)
-    let dirname = path.dirname(file)
-    let outputFilePath = path.resolve(dirname, filenameNoExt + '.anno.csv')
-    fs.writeFileSync(outputFilePath, scoring(annotations), 'utf-8')
-  }
-}
+//     let annotations = fs.readFileSync(file, 'utf-8')
+//     // console.log(annotations)
+//     let dirname = path.dirname(file)
+//     let outputFilePath = path.resolve(dirname, filenameNoExt + '.anno.csv')
+//     fs.writeFileSync(outputFilePath, scoring(annotations), 'utf-8')
+//   }
+// }
 
 let scoring = function (annotations) {
   let lines = annotations.trim().split('\n').map(line => line.trim()).filter(line => (line !== ''))
@@ -100,6 +100,8 @@ let scoring = function (annotations) {
   let totalList = []
   let adjTotalList = []
   let plusAdjTotalList = []
+  
+  let idTotalList = []
 
   
   for (let i = 0; i < idArray.length; i++) {
@@ -156,6 +158,12 @@ let scoring = function (annotations) {
     // ----------------------------------------------------------------
 
     output.push(line.join(','))
+
+    idTotalList.push({
+      id,
+      adjTotal,
+      plusAdjTotal
+    })
   }
 
   // -------------------
@@ -182,7 +190,7 @@ let scoring = function (annotations) {
     scoreArrayPercent.push(percent)
   }
 
-  let prependArray = ['', '', '']
+  // let prependArray = ['', '', '']
 
   let avgTotalList = Math.round(average(totalList))
   let avgAdjTotalList = Math.round(average(adjTotalList))
@@ -205,14 +213,14 @@ let scoring = function (annotations) {
 
   let passTotalCount = Math.round(totalList.filter(s => s >= 60).length / totalList.length * 100) 
   let passAdjTotalCount = Math.round(adjTotalList.filter(s => s >= 60).length / adjTotalList.length * 100) 
-  let passPlusAdjTotaCount = Math.round(plusAdjTotalList.filter(s => s >= 60).length / plusAdjTotalList.length * 100) 
+  let passPlusAdjTotalCount = Math.round(plusAdjTotalList.filter(s => s >= 60).length / plusAdjTotalList.length * 100) 
 
   // let passTotalCount = totalList.filter(s => s >= 60).length
   // let passAdjTotalCount = adjTotalList.filter(s => s >= 60).length
   // let passPlusAdjTotaCount = plusAdjTotalList.filter(s => s >= 60).length
 
   output.push('')
-  output.push(['pass'].concat([passTotalCount, passAdjTotalCount, passPlusAdjTotaCount]))
+  output.push(['pass'].concat([passTotalCount, passAdjTotalCount, passPlusAdjTotalCount]))
 
   // -------------------
 
@@ -221,7 +229,12 @@ let scoring = function (annotations) {
   // -------------------
 
   console.log(output.join('\n'))
-  return output.join('\n')
+  return {
+    scores: output.join('\n'),
+    idTotalList
+  }
 }
 
-main()
+// main()
+
+module.exports = scoring
