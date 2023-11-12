@@ -8,21 +8,28 @@ function GeneralScoreScript(idTotalList, prependFilename) {
 
   let adjTotalJS = {}
   let plusAdjTotalJS = {}
+  let testJS = {}
 
   // ----------------------------------------------------------------
 
-  idTotalList.forEach(({id, adjTotal, plusAdjTotal, comment}) => {
+  idTotalList.forEach(({id, adjTotal, plusAdjTotal, comment}, i) => {
     adjTotalJS[id] = {score: adjTotal, comment}
     plusAdjTotalJS[id] = {score: plusAdjTotal, comment}
+
+    if (i < 3) {
+      testJS[id] = {score: plusAdjTotal, comment}
+    }
   })
 
   adjTotalJS = createJS(adjTotalJS, prependFilename)
   plusAdjTotalJS = createJS(plusAdjTotalJS, prependFilename)
-
+  testJS = createJS(testJS, prependFilename)
+  
   // ----------------------------------------------------------------
   return {
     adjTotalJS,
-    plusAdjTotalJS
+    plusAdjTotalJS,
+    testJS
   }
 }
 

@@ -40,13 +40,15 @@ let main = async function () {
 
     // -----------------
 
-    let splitInformation = await ExtractSplitInformation(file)
-    // console.log(splitInformation)
-    await SplitPDF(file, splitInformation)
-
-    // -----------------
-
-    await ShellSpawn(`cd /output/${fileNameWithoutExt}; zip -r ../${fileNameWithoutExt}.zip . -i *`)
+    if (fs.existsSync(path.resolve('/output/', fileNameWithoutExt)) === false) {
+      let splitInformation = await ExtractSplitInformation(file)
+      // console.log(splitInformation)
+      await SplitPDF(file, splitInformation)
+    }
+    
+    if (fs.existsSync(path.resolve('/output/', fileNameWithoutExt + '.zip')) === false) {
+      await ShellSpawn(`cd /output/${fileNameWithoutExt}; zip -r ../${fileNameWithoutExt}.zip . -i *`)
+    } 
   }
 }
 
