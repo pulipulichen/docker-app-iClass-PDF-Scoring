@@ -38,7 +38,7 @@ module.exports = async function (inputFile, splitInformation) {
       outputName = outputName.slice(0, 50).trim()
     }
     outputName = basenameNoExt + '_' + outputName + '.pdf'
-    let cmd = [`qpdf`, `--decrypt`, `"${inputFile}"`, `--pages`, `"${inputFile}"`, `${start}-${end}`, `--`, `"${path.join(__dirname, '../../input/' + basenameNoExt + '/',  outputName)}"`]
+    let cmd = [`qpdf`, `--decrypt`, `"${inputFile}"`, `--pages`, `"${inputFile}"`, `${start}-${end}`, `--`, `"${path.join(__dirname, '../../output/' + basenameNoExt + '/',  outputName)}"`]
     console.log(cmd.join(' '))
     
     await ShellSpawn(cmd)
