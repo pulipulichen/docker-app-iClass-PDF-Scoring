@@ -172,7 +172,7 @@ main = async function () {
         giveScoreButton.click()
 
         // break
-        await sleep(500)
+        await sleep(5000)
 
         /*
         let closeIcon = $(`#give-score:visible:first .popup-header:visible:first a[close-popup="give-score"]`)
