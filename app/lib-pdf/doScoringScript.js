@@ -26,6 +26,7 @@ main = async function () {
 
     
     stuIDList = Object.keys(scores)
+    let waitCounter = 0
 
     for (let i = 0; i < stuIDList.length; i++) {
         console.log(`${i}/${stuIDList.length}`)
@@ -57,7 +58,7 @@ main = async function () {
         console.log({existedFile: existedFile.length})
         // console.log(existedFile.length)
         // break
-        if (existedFile.length > 0) {
+        if (existedFile.length > 2) {
             for (let j = 0; j < existedFile.length; j++) {
                 let fileRow = existedFile.eq(j)
                 fileRow.find(`.ivu-btn-text:last`).click()
@@ -79,71 +80,77 @@ main = async function () {
             }
             await sleep(500)
         }
+        else if (existedFile.length === 0) {
 
+            // --------------------------
+            // 選擇檔案
 
-
-        // --------------------------
-        // 選擇檔案
-
-        /*
-        if (existedFile.length > 0) {
-            let closeIcon = $(`#give-score:visible:first .popup-header:visible:first a[close-popup="give-score"]`)
-            closeIcon.click()
-            // break
-            await sleep(500)
-            // break // 測試用
-            continue
-        }
-        */
-
-        let selectFileButton = $(`.add-file-btn:first`)
-        // console.log(selectFileButton.length)
-        selectFileButton[0].dispatchEvent(eventClick)
-        await sleep(3000)
-
-        // ----------------
-
-        let searchInput = $(`.search-key:visible input`)
-        while (searchInput.length === 0) {
-            await sleep(500)
-            searchInput = $(`.search-key:visible input`)
-        }
-        searchInput.val(prependFilename + '_' + stuID + '.pdf').change()
-        try {
-            searchInput[0].dispatchEvent(eventChange)
-        } catch (e) {
-          console.error(prependFilename + '_' + stuID + '.pdf')
-          throw e
-        }
-        
-        await sleep(500)
-        let searchButton = $(`.search-btn a:first:visible`).click()
-        await sleep(500)
-
-        let fileList = $(`.file-list:visible:first`)
-        let waitCounter = 0
-        while(fileList.find(`.row`).length > 1 || fileList.find(`.row`).length === 0) {
-            await sleep(500)
-            waitCounter++
-            if (waitCounter > 0 && waitCounter % 30 === 0) {
-                searchButton[0].dispatchEvent(eventClick)
+            /*
+            if (existedFile.length > 0) {
+                let closeIcon = $(`#give-score:visible:first .popup-header:visible:first a[close-popup="give-score"]`)
+                closeIcon.click()
+                // break
+                await sleep(500)
+                // break // 測試用
+                continue
             }
+            */
+
+            let selectFileButton = $(`.add-file-btn:first`)
+            // console.log(selectFileButton.length)
+            selectFileButton[0].dispatchEvent(eventClick)
+            await sleep(3000)
+
+            // ----------------
+
+            let searchInput = $(`.search-key:visible input`)
+            waitCounter = 0
+            while (searchInput.length === 0) {
+                await sleep(500)
+                searchInput = $(`.search-key:visible input`)
+
+                if (waitCounter > 0 && waitCounter % 20 === 0) {
+                    selectFileButton[0].dispatchEvent(eventClick)
+                }
+            }
+            searchInput.val(prependFilename + '_' + stuID + '.pdf').change()
+            try {
+                searchInput[0].dispatchEvent(eventChange)
+            } catch (e) {
+              console.error(prependFilename + '_' + stuID + '.pdf')
+              throw e
+            }
+            
+            await sleep(500)
+            let searchButton = $(`.search-btn a:first:visible`).click()
+            await sleep(500)
+
+            let fileList = $(`.file-list:visible:first`)
+            waitCounter = 0
+            while(fileList.find(`.row`).length > 1 || fileList.find(`.row`).length === 0) {
+                await sleep(500)
+                waitCounter++
+                if (waitCounter > 0 && waitCounter % 20 === 0) {
+                    searchButton[0].dispatchEvent(eventClick)
+                }
+            }
+            let fileCheckbox = fileList.find(`.row.file-list-item .check input[type="checkbox"]`)
+            fileCheckbox.click()
+
+            $(`.ipr-message input[type="checkbox"]`).click()
+
+            let submitButton = $(`.file-select.popup-area:visible:first .popup-footer:visible:first .button:visible:first`)
+            // console.log(submitButton.length)
+            // console.log(submitButton[0])
+            submitButton.click()
+
+            await sleep(500)
+            while ($(`.search-btn a:first:visible`).length > 0) {
+              await sleep(500)
+            }
+            await sleep(500)
+
         }
-        let fileCheckbox = fileList.find(`.row.file-list-item .check input[type="checkbox"]`)
-        fileCheckbox.click()
-
-        $(`.ipr-message input[type="checkbox"]`).click()
-
-        let submitButton = $(`.file-select.popup-area:visible:first .popup-footer:visible:first .button:visible:first`)
-        // console.log(submitButton.length)
-        // console.log(submitButton[0])
-        submitButton.click()
-
-        await sleep(500)
-        while ($(`.search-btn a:first:visible`).length > 0) {
-          await sleep(500)
-        }
-        await sleep(500)
 
         // --------------------
 
