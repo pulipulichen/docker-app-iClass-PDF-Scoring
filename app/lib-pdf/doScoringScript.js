@@ -78,9 +78,11 @@ main = async function () {
                 }
                 await sleep(500)
             }
-            await sleep(500)
+            await sleep(3000)
+
+            existedFile = $(`.upload-container:visible .upload:visible`)
         }
-        else if (existedFile.length === 0) {
+        if (existedFile.length === 0) {
 
             // --------------------------
             // 選擇檔案
