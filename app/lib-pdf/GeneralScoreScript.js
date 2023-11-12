@@ -16,7 +16,7 @@ function GeneralScoreScript(idTotalList) {
     plusAdjTotalJS[id] = plusAdjTotal
   })
 
-  adjTotalJS = createJS(adjTotal)
+  adjTotalJS = createJS(adjTotalJS)
   plusAdjTotalJS = createJS(plusAdjTotalJS)
 
   // ----------------------------------------------------------------
