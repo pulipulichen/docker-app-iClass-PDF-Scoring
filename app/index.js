@@ -33,10 +33,11 @@ let main = async function () {
 
     // -----------------
 
-    let {adjTotalJS, plusAdjTotalJS} = GeneralScoreScript(idTotalList, fileNameWithoutExt)
+    let {adjTotalJS, plusAdjTotalJS, testJS} = GeneralScoreScript(idTotalList, fileNameWithoutExt)
 
     fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_adj-total.js'), adjTotalJS, 'utf-8')
     fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_plus-adj-total.js'), plusAdjTotalJS, 'utf-8')
+    fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_test.js'), testJS, 'utf-8')
 
     // -----------------
 
@@ -45,7 +46,7 @@ let main = async function () {
       // console.log(splitInformation)
       await SplitPDF(file, splitInformation)
     }
-    
+
     if (fs.existsSync(path.resolve('/output/', fileNameWithoutExt + '.zip')) === false) {
       await ShellSpawn(`cd /output/${fileNameWithoutExt}; zip -r ../${fileNameWithoutExt}.zip . -i *`)
     } 
