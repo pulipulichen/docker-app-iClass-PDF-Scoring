@@ -15,7 +15,7 @@ module.exports = async function (inputFile, splitInformation) {
   // let basename = path.basename(inputFile)
   let basenameNoExt = path.parse(inputFile).name
 
-  await ShellSpawn([`mkdir`, `-p`, `"${path.join(__dirname, '../../input/' + basenameNoExt)}"`])
+  await ShellSpawn([`mkdir`, `-p`, `"${path.join(__dirname, '../../output/' + basenameNoExt)}"`])
 
   // let files = []
   for (let i = 0; i < splitInformation.length; i++) {
