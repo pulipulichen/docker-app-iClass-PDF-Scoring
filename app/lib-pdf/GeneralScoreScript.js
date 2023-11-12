@@ -11,9 +11,9 @@ function GeneralScoreScript(idTotalList, prependFilename) {
 
   // ----------------------------------------------------------------
 
-  idTotalList.forEach(({id, adjTotal, plusAdjTotal}) => {
-    adjTotalJS[id] = adjTotal
-    plusAdjTotalJS[id] = plusAdjTotal
+  idTotalList.forEach(({id, adjTotal, plusAdjTotal, comment}) => {
+    adjTotalJS[id] = {score: adjTotal, comment}
+    plusAdjTotalJS[id] = {score: plusAdjTotal, comment}
   })
 
   adjTotalJS = createJS(adjTotalJS, prependFilename)

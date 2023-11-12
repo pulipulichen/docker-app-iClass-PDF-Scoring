@@ -162,7 +162,8 @@ let scoring = function (annotations) {
     idTotalList.push({
       id,
       adjTotal,
-      plusAdjTotal
+      plusAdjTotal,
+      comment: comments.join(' / ')
     })
   }
 

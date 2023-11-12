@@ -1,17 +1,12 @@
 // 取得學號
-//stuID = $('.user_no.truncate-text').text()
 
 mainTable = $('.activity-body.sync-scroll')
-//idSpan = mainTable.find(`[tipsy="submission.student.user_no"][original-title="408000445"]`)
-//row = idSpan.parents(`li.homework-row:first`)
-//scoreInput = row.find(`input[type="text"].score-input`)
 
 sleep = function (ms = 500) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 eventChange = new Event("blur");
-
 
 main = async function () {
     stuIDList = Object.keys(scores)
@@ -23,7 +18,7 @@ main = async function () {
 
         stuID = stuIDList[i]
 
-        let score = scores[stuID]
+        let {score, comment} = scores[stuID]
   
         let idSpan = mainTable.find(`[tipsy="submission.student.user_no"][original-title="${stuID}"]`)
         let row = idSpan.parents(`li.homework-row:first`)
@@ -50,6 +45,16 @@ main = async function () {
         }
 
         let scoreInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
+        if (scoreInput.val() !== score + '') {
+            scoreInput.val(score).change().blur()
+
+            let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
+            giveScoreButtonFile.click()
+            await sleep(500)
+        }
+
+        // 這邊應該會是錯的，我們稍微等一下試試看吧
+        let commentInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
         if (scoreInput.val() !== score + '') {
             scoreInput.val(score).change().blur()
 
