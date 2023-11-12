@@ -7,6 +7,8 @@ sleep = function (ms = 500) {
 }
 
 eventChange = new Event("blur");
+eventClick = new Event("click");
+eventInput = new Event("input");
 
 main = async function () {
     stuIDList = Object.keys(scores)
@@ -19,17 +21,24 @@ main = async function () {
         stuID = stuIDList[i]
 
         let {score, comment} = scores[stuID]
+
+        // --------------------
+        // 列表
   
         let idSpan = mainTable.find(`[tipsy="submission.student.user_no"][original-title="${stuID}"]`)
         let row = idSpan.parents(`li.homework-row:first`)
 
-        let giveScoreIcon = row.find(`.submission-operations`)
+        let giveScoreIcon = row.find(`.submission-operations:first`)
         // console.log(giveScoreIcon.length)
         // break
-        giveScoreIcon.click()
+        giveScoreIcon[0].dispatchEvent(eventClick)
 
         await sleep(1000)
 
+        // --------------
+        // 單一人的狀態
+
+        // 檢查有沒有檔案
         let existedFile = $(`.field.homework-data:visible .attachment-row`)
         // console.log(existedFile.length)
         // break
@@ -44,25 +53,12 @@ main = async function () {
             await sleep(500)
         }
 
-        let scoreInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
-        if (scoreInput.val() !== score + '') {
-            scoreInput.val(score).change().blur()
 
-            let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
-            giveScoreButtonFile.click()
-            await sleep(500)
-        }
 
-        // 這邊應該會是錯的，我們稍微等一下試試看吧
-        let commentInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
-        if (scoreInput.val() !== score + '') {
-            scoreInput.val(score).change().blur()
+        // --------------------------
+        // 選擇檔案
 
-            let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
-            giveScoreButtonFile.click()
-            await sleep(500)
-        }
-
+        /*
         if (existedFile.length > 0) {
             let closeIcon = $(`#give-score:visible:first .popup-header:visible:first a[close-popup="give-score"]`)
             closeIcon.click()
@@ -71,11 +67,14 @@ main = async function () {
             // break // 測試用
             continue
         }
+        */
 
-        let selectFileButton = $(`.field.homework-data:visible .select-file button:first`)
+        let selectFileButton = $(`.add-file-btn:first`)
         // console.log(selectFileButton.length)
-        selectFileButton.click()
+        selectFileButton[0].dispatchEvent(eventClick)
         await sleep(500)
+
+        // ----------------
 
         let searchInput = $(`.search-key:visible input`)
         while (searchInput.length === 0) {
@@ -109,14 +108,46 @@ main = async function () {
         submitButton.click()
 
         await sleep(500)
+        while ($(`.search-btn a:first:visible`).length > 0) {
+          await sleep(500)
+        }
+        await sleep(500)
 
         // --------------------
 
+        let scoreInput = $(`.input-score input`)
+        if (scoreInput.val() !== score + '') {
+            //scoreInput.val(score).change().blur()
+            scoreInput.val(score)
+
+
+            scoreInput[0].dispatchEvent(eventInput)
+            await sleep(500)
+
+            scoreInput[0].dispatchEvent(eventChange)
+
+            //let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
+            //giveScoreButtonFile.click()
+            await sleep(500)
+        }
+
+        let commentInput = $(`.ivu-input-type-textarea textarea`)
+        if (commentInput.val() !== comment + '') {
+            commentInput.val(comment)
+
+            commentInput[0].dispatchEvent(eventInput)
+            await sleep(500)
+
+            commentInput[0].dispatchEvent(eventChange)
+            await sleep(500)
+        }
+
+        // ------------
         // let scoreInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
-        scoreInput.val(score).change().blur()
+        //scoreInput.val(score).change().blur()
         // scoreInput[0].dispatchEvent(eventChange)
 
-        let giveScoreButton = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
+        let giveScoreButton = $('.header-left:visible:first > button:visible:first')
         //console.log(giveScoreButton.length)
         //console.log(giveScoreButton[0])
         giveScoreButton.click()
@@ -124,6 +155,7 @@ main = async function () {
         // break
         await sleep(500)
 
+        /*
         let closeIcon = $(`#give-score:visible:first .popup-header:visible:first a[close-popup="give-score"]`)
         closeIcon.click()
 
@@ -133,6 +165,7 @@ main = async function () {
         // break   // 測試用
         
         await sleep(500)
+        */
     }   
 }
 
