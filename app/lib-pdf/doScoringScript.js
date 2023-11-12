@@ -199,6 +199,10 @@ main = async function () {
         await sleep(500)
         */
     }   
+
+    console.log(`================================================`)
+    console.log(`FINISH`)
+    console.log(`================================================`)
 }
 
 main()
