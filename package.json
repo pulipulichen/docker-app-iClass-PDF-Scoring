@@ -1,0 +1,33 @@
+{
+  "name": "docker-app-PDF-Annotation-Extractor",
+  "version": "1.0.0",
+  "description": "Package images to a ZIP file and convert it to PDF.",
+  "main": "index.js",
+  "scripts": {
+    "d0.build": "docker-compose build",
+    "d1.bash": "docker-compose run app bash",
+    "start": "docker-compose up",
+    "update": "node update.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-app-PDF-Annotation-Extractor.git"
+  },
+  "keywords": [
+    "PWA"
+  ],
+  "author": "Pulipuli Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulipulichen/docker-app-PDF-Annotation-Extractor/issues"
+  },
+  "homepage": "https://github.com/pulipulichen/docker-app-PDF-Annotation-Extractor#readme",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "csv-reader": "1.0.10",
+    "annotpdf": "1.0.15",
+    "fast-glob": "3.2.12",
+    "pdf-page-counter": "1.0.3"
+  }
+}

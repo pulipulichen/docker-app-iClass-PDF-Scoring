@@ -1,0 +1,10 @@
+version: "3"
+services:
+  app:
+    build: .
+    tty: true
+    command: node /app/extract-pdf-annotations.js "/input/c4611 sample explain.pdf"
+    volumes: 
+      - ./app:/app/
+      - ./cache:/cache/
+      - /home/pudding/NetBeansProjects/MicroSD-NetBeansProjects/docker-app/docker-app-PDF-Annotation-Extractor/example folder:/input/
