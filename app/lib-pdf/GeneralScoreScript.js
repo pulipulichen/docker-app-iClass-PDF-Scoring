@@ -3,7 +3,7 @@ const fs = require('fs')
 
 
 
-function GeneralScoreScript(idTotalList) {
+function GeneralScoreScript(idTotalList, prependFilename) {
   
 
   let adjTotalJS = {}
@@ -16,8 +16,8 @@ function GeneralScoreScript(idTotalList) {
     plusAdjTotalJS[id] = plusAdjTotal
   })
 
-  adjTotalJS = createJS(adjTotalJS)
-  plusAdjTotalJS = createJS(plusAdjTotalJS)
+  adjTotalJS = createJS(adjTotalJS, prependFilename)
+  plusAdjTotalJS = createJS(plusAdjTotalJS, prependFilename)
 
   // ----------------------------------------------------------------
   return {

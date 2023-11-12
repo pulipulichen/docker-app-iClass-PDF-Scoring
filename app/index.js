@@ -11,6 +11,8 @@ const SplitPDF = require('./lib-pdf/SplitPDF.js')
 
 const ExtractSplitInformation = require('./lib-pdf/ExtractSplitInformation.js')
 
+const ShellSpawn = require('./lib/ShellSpawn')
+
 let main = async function () {
   let files = GetFiles()
 
@@ -31,7 +33,7 @@ let main = async function () {
 
     // -----------------
 
-    let {adjTotalJS, plusAdjTotalJS} = GeneralScoreScript(idTotalList)
+    let {adjTotalJS, plusAdjTotalJS} = GeneralScoreScript(idTotalList, fileNameWithoutExt)
 
     fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_adj-total.js'), adjTotalJS, 'utf-8')
     fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_plus-adj-total.js'), plusAdjTotalJS, 'utf-8')
@@ -41,6 +43,10 @@ let main = async function () {
     let splitInformation = await ExtractSplitInformation(file)
     // console.log(splitInformation)
     await SplitPDF(file, splitInformation)
+
+    // -----------------
+
+    await ShellSpawn(`zip ${fileNameWithoutExt}.zip ${fileNameWithoutExt}/*`)
   }
 }
 
