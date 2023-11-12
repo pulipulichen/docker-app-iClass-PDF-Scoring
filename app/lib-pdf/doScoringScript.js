@@ -44,7 +44,7 @@ main = async function () {
         console.log({existedFile: existedFile.length})
         // console.log(existedFile.length)
         // break
-        if (existedFile.length > 1) {
+        if (existedFile.length > 0) {
             for (let j = 1; j < existedFile.length; j++) {
                 let fileRow = existedFile.eq(j)
                 fileRow.find(`.ivu-btn-text:last`).click()
