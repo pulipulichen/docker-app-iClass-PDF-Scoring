@@ -1,8 +1,6 @@
 
 // 取得學號
 
-mainTable = $('.activity-body.sync-scroll')
-
 sleep = function (ms = 500) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -12,6 +10,21 @@ eventClick = new Event("click");
 eventInput = new Event("input");
 
 main = async function () {
+    
+    mainTable = $('.activity-body.sync-scroll:visible')
+
+    if (mainTable.length === 0) {
+        $(`[ng-click="ui.view = 'scores'"]:visible`).click()
+        await sleep(3000)
+        
+        mainTable = $('.activity-body.sync-scroll:visible')
+        while (mainTable.length === 0) {
+            await sleep(1000)
+            mainTable = $('.activity-body.sync-scroll:visible')
+        }
+    }
+
+    
     stuIDList = Object.keys(scores)
 
     for (let i = 0; i < stuIDList.length; i++) {
@@ -45,7 +58,7 @@ main = async function () {
         // console.log(existedFile.length)
         // break
         if (existedFile.length > 0) {
-            for (let j = 1; j < existedFile.length; j++) {
+            for (let j = 0; j < existedFile.length; j++) {
                 let fileRow = existedFile.eq(j)
                 fileRow.find(`.ivu-btn-text:last`).click()
                 await sleep(500)
@@ -135,7 +148,7 @@ main = async function () {
         // --------------------
 
         let scoreInput = $(`.input-score input`)
-        while (scoreInput.val() !== score + '') {
+        while (Number(scoreInput.val()) !== Number(score + '')) {
             //scoreInput.val(score).change().blur()
             scoreInput.val(score)
 
