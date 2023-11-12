@@ -35,7 +35,7 @@ main = async function () {
         // break
         giveScoreIcon[0].dispatchEvent(eventClick)
 
-        await sleep(1000)
+        await sleep(5000)
 
         // --------------
         // 單一人的狀態
