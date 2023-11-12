@@ -1,5 +1,7 @@
 // 取得學號
 
+// 取得學號
+
 mainTable = $('.activity-body.sync-scroll')
 
 sleep = function (ms = 500) {
@@ -39,17 +41,29 @@ main = async function () {
         // 單一人的狀態
 
         // 檢查有沒有檔案
-        let existedFile = $(`.field.homework-data:visible .attachment-row`)
+        let existedFile = $(`.upload-container .upload`)
         // console.log(existedFile.length)
         // break
         if (existedFile.length > 1) {
             for (let j = 1; j < existedFile.length; j++) {
                 let fileRow = existedFile.eq(j)
-                fileRow.find(`a[original-title="刪除"]`).click()
+                fileRow.find(`.ivu-btn-text:last`).click()
+                await sleep(500)
+
+                let deleteButton = $('.ivu-modal-content .ivu-modal-body .ivu-modal-confirm .ivu-btn-primary:visible')
+                while (deleteButton.length === 0) {
+                    await sleep(500)
+                    deleteButton = $('.ivu-modal-content .ivu-modal-body .ivu-modal-confirm .ivu-btn-primary:visible')
+                }
+                deleteButton.click()
+
+                await sleep(500)
+                while (deleteButton.length > 0) {
+                    await sleep(500)
+                    deleteButton = $('.ivu-modal-content .ivu-modal-body .ivu-modal-confirm .ivu-btn-primary:visible')
+                }
                 await sleep(500)
             }
-            let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
-            giveScoreButtonFile.click()
             await sleep(500)
         }
 
@@ -89,13 +103,18 @@ main = async function () {
           throw e
         }
         
-
+        await sleep(500)
         let searchButton = $(`.search-btn a:first:visible`).click()
         await sleep(500)
 
         let fileList = $(`.file-list:visible:first`)
+        let waitCounter = 0
         while(fileList.find(`.row`).length > 1 || fileList.find(`.row`).length === 0) {
             await sleep(500)
+            waitCounter++
+            if (waitCounter > 0 && waitCounter % 30 === 0) {
+                searchButton[0].dispatchEvent(eventClick)
+            }
         }
         let fileCheckbox = fileList.find(`.row.file-list-item .check input[type="checkbox"]`)
         fileCheckbox.click()
