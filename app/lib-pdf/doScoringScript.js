@@ -1,4 +1,3 @@
-// 取得學號
 
 // 取得學號
 
@@ -41,7 +40,8 @@ main = async function () {
         // 單一人的狀態
 
         // 檢查有沒有檔案
-        let existedFile = $(`.upload-container .upload`)
+        let existedFile = $(`.upload-container:visible .upload:visible`)
+        console.log({existedFile: existedFile.length})
         // console.log(existedFile.length)
         // break
         if (existedFile.length > 1) {
