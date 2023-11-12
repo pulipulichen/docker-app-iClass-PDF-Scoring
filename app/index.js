@@ -46,7 +46,7 @@ let main = async function () {
 
     // -----------------
 
-    await ShellSpawn(`zip /output/${fileNameWithoutExt}.zip /output/${fileNameWithoutExt}`)
+    await ShellSpawn(`zip -r /output/${fileNameWithoutExt}.zip /output/${fileNameWithoutExt}`)
   }
 }
 
