@@ -86,7 +86,7 @@ main = async function () {
         let selectFileButton = $(`.add-file-btn:first`)
         // console.log(selectFileButton.length)
         selectFileButton[0].dispatchEvent(eventClick)
-        await sleep(500)
+        await sleep(3000)
 
         // ----------------
 
@@ -135,7 +135,7 @@ main = async function () {
         // --------------------
 
         let scoreInput = $(`.input-score input`)
-        if (scoreInput.val() !== score + '') {
+        while (scoreInput.val() !== score + '') {
             //scoreInput.val(score).change().blur()
             scoreInput.val(score)
 
@@ -147,18 +147,18 @@ main = async function () {
 
             //let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
             //giveScoreButtonFile.click()
-            await sleep(500)
+            await sleep(1000)
         }
 
         let commentInput = $(`.ivu-input-type-textarea textarea`)
-        if (commentInput.val() !== comment + '') {
+        while (commentInput.val() !== comment + '') {
             commentInput.val(comment)
 
             commentInput[0].dispatchEvent(eventInput)
             await sleep(500)
 
             commentInput[0].dispatchEvent(eventChange)
-            await sleep(500)
+            await sleep(1000)
         }
 
         // ------------
