@@ -1,8 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
+
+
 function GeneralScoreScript(idTotalList) {
-  let doScoringScript = fs.readFileSync(path.resolve(__dirname, './doScoringScript.js'), 'utf8')
+  
 
   let adjTotalJS = {}
   let plusAdjTotalJS = {}
@@ -14,14 +16,23 @@ function GeneralScoreScript(idTotalList) {
     plusAdjTotalJS[id] = plusAdjTotal
   })
 
-  adjTotalJS = JSON.stringify(adjTotalJS) + '\n' + doScoringScript
-  plusAdjTotalJS = JSON.stringify(plusAdjTotalJS) + '\n' + doScoringScript
+  adjTotalJS = createJS(adjTotal)
+  plusAdjTotalJS = createJS(plusAdjTotalJS)
 
   // ----------------------------------------------------------------
   return {
     adjTotalJS,
     plusAdjTotalJS
   }
+}
+
+function createJS (scores, prependFilename) {
+  let doScoringScript = fs.readFileSync(path.resolve(__dirname, './doScoringScript.js'), 'utf8')
+
+  return `scores = ${JSON.stringify(scores)}
+prependFilename = "${prependFilename}"
+
+${doScoringScript}`
 }
 
 module.exports = GeneralScoreScript

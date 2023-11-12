@@ -9,6 +9,8 @@ const scoring = require('./lib-pdf/scoring.js')
 const GeneralScoreScript = require('./lib-pdf/GeneralScoreScript.js')
 const SplitPDF = require('./lib-pdf/SplitPDF.js')
 
+const ExtractSplitInformation = require('./lib-pdf/ExtractSplitInformation.js')
+
 let main = async function () {
   let files = GetFiles()
 
