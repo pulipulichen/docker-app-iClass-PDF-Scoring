@@ -105,7 +105,7 @@ then
   git reset --hard
   git pull --force
 else
-  project_inited = true
+  project_inited=true
 	# echo "$DIR directory does not exist."
   mkdir -p /tmp/docker-app/
   cd /tmp/docker-app/
