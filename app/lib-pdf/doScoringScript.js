@@ -157,10 +157,9 @@ main = async function () {
         // --------------------
 
         let scoreInput = $(`.input-score input`)
-        while (Number(scoreInput.val()) !== Number(score + '')) {
+        while (scoreInput.val().trim().length === 0 || Number(scoreInput.val()) !== Number(score + '')) {
             //scoreInput.val(score).change().blur()
             scoreInput.val(score)
-
 
             scoreInput[0].dispatchEvent(eventInput)
             await sleep(500)
