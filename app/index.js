@@ -48,7 +48,7 @@ let main = async function () {
     }
 
     if (fs.existsSync(path.resolve('/output/', fileNameWithoutExt + '.zip')) === false) {
-      await ShellSpawn(`cd /output/${fileNameWithoutExt}; echo zip -r ../${fileNameWithoutExt}.zip . -i *`)
+      await ShellSpawn(`cd "/output/${fileNameWithoutExt}"; echo zip -r ../"${fileNameWithoutExt}.zip" . -i *`)
     } 
   }
 }
