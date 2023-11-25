@@ -66,7 +66,7 @@ let processODS = async function (file) {
   
   const fileNameWithoutExt = path.basename(file, path.extname(file))
 
-  let scores = scoringODS(file)
+  let scores = await scoringODS(file)
   console.log({scores})
   let {scoreJS, testJS} = GeneralODSScoreScript(scores, fileNameWithoutExt)
 
