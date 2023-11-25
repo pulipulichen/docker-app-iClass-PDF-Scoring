@@ -6,7 +6,7 @@ const XLSX = require('xlsx');
 let scoring = async function (file) {
   try {
     console.log({file})
-    const workbook = XLSX.readFile(filePath);
+    const workbook = XLSX.readFile(file);
 
     let result = [];
 
