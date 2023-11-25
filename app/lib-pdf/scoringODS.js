@@ -10,6 +10,7 @@ let scoring = async function (file) {
     let result = [];
 
     workbook.eachSheet((worksheet, sheetId) => {
+      console.log({sheetId})
       const sheetData = [];
       const headers = [];
 
