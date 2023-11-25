@@ -44,6 +44,11 @@ main = async function () {
         let row = idSpan.parents(`li.homework-row:first`)
 
         let giveScoreIcon = row.find(`.submission-operations:first`)
+
+        if (!giveScoreIcon[0]) {
+            console.error('giveScoreIcon is not found. go to next...')
+            continue
+        }
         // console.log(giveScoreIcon.length)
         // break
         giveScoreIcon[0].dispatchEvent(eventClick)
