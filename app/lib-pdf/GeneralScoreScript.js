@@ -34,7 +34,7 @@ function GeneralScoreScript(idTotalList, prependFilename) {
 }
 
 function createJS (scores, prependFilename) {
-  let doScoringScript = fs.readFileSync(path.resolve(__dirname, './doScoringScript.js'), 'utf8')
+  let doScoringScript = fs.readFileSync(path.resolve(__dirname, './assets/doScoringScript.js'), 'utf8')
 
   return `scores = ${JSON.stringify(scores)}
 prependFilename = "${prependFilename}"

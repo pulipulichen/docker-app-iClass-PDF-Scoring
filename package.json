@@ -29,6 +29,7 @@
     "csv-reader": "1.0.10",
     "annotpdf": "1.0.15",
     "fast-glob": "3.2.12",
-    "pdf-page-counter": "1.0.3"
+    "pdf-page-counter": "1.0.3",
+    "exceljs": "4.4.0"
   }
 }
