@@ -34,6 +34,7 @@ let scoring = async function (file) {
       result = result.concat(sheetData)
     });
 
+    console.log(result)
     return result;
   } catch (error) {
     console.error('Error reading ODS file:', error.message);
