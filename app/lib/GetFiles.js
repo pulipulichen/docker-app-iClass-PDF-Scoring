@@ -2,8 +2,6 @@ const fs = require('fs');
 const GetExistedArgv = require('./GetExistedArgv')
 const path = require('path');
 
-
-
 function GetFiles() {
   let files = GetExistedArgv()
   
