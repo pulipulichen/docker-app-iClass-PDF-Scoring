@@ -5,6 +5,7 @@ const workbook = new ExcelJS.Workbook();
 
 let scoring = async function (file) {
   try {
+    console.log({file})
     await workbook.xlsx.readFile(file);
 
     let result = [];
