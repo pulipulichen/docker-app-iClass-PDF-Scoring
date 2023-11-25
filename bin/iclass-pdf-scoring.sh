@@ -36,5 +36,6 @@ for ((i = 0; i < ${#PARAMETERS[@]}; i++)); do
 done
 
 # Step 7: Pass parameters to "~/docker-app/docker-app-launcher.sh"
+echo "$PROJECT_NAME" "$SCRIPT_PATH" "${PARAMETERS[@]}"
 /tmp/docker-app/docker-app-launcher.sh "$PROJECT_NAME" "$SCRIPT_PATH" "${PARAMETERS[@]}"
-# echo "$PROJECT_NAME" "$SCRIPT_PATH" "${PARAMETERS[@]}"
+
