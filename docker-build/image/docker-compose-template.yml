@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-app:docker-app-iclass-pdf-scoring-20231125.145129
+    image: pudding/docker-app:docker-app-iclass-pdf-scoring-20231125.151506
     command: node /app/index.js "/input/__INPUT__"
     tty: true
     environment:

@@ -1,38 +1,18 @@
-const ExcelJS = require('exceljs');
-const fs = require('fs')
+const XLSX = require('xlsx');
+// const fs = require('fs')
 
-const workbook = new ExcelJS.Workbook();
+// const workbook = new ExcelJS.Workbook();
 
 let scoring = async function (file) {
   try {
     console.log({file})
-    await workbook.xlsx.readFile(file);
+    const workbook = XLSX.readFile(filePath);
 
     let result = [];
 
-    workbook.eachSheet((worksheet, sheetId) => {
-      console.log({sheetId})
-      const sheetData = [];
-      const headers = [];
-
-      worksheet.eachRow((row, rowNumber) => {
-        const rowData = {};
-        row.eachCell((cell, colNumber) => {
-          if (rowNumber === 1) {
-            // Store headers from the first row
-            headers.push(cell.value);
-          } else {
-            // Use headers as keys for subsequent rows
-            rowData[headers[colNumber - 1]] = cell.value;
-          }
-        });
-
-        // Skip processing the first row, as it contains headers
-        if (rowNumber > 1) {
-          sheetData.push(rowData);
-        }
-      });
-
+    workbook.SheetNames.forEach(sheetName => {
+      const worksheet = workbook.Sheets[sheetName];
+      const sheetData = XLSX.utils.sheet_to_json(worksheet);
       result = result.concat(sheetData)
     });
 
