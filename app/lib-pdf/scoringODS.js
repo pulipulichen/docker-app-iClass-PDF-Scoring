@@ -5,7 +5,7 @@ const XLSX = require('xlsx');
 
 let scoring = async function (file) {
   try {
-    console.log({file})
+    // console.log({file})
     const workbook = XLSX.readFile(file);
 
     let result = [];
@@ -16,7 +16,7 @@ let scoring = async function (file) {
       result = result.concat(sheetData)
     });
 
-    console.log(result)
+    // console.log(result)
     return result;
   } catch (error) {
     console.error('Error reading ODS file:', error.message);

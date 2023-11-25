@@ -59,7 +59,7 @@ main = async function () {
         // 單一人的狀態
 
         // 檢查有沒有檔案
-        if (prependFilename) {
+        if (typeof(prependFilename) === 'string') {
             let existedFile = $(`.upload-container:visible .upload:visible`)
             console.log({existedFile: existedFile.length})
             // console.log(existedFile.length)
