@@ -9,9 +9,9 @@ module.exports = function () {
 
   args = args.slice(2)
   args = args.filter(arg => {
-    console.log(arg)
+    // console.log(arg)
     return fs.existsSync(arg)
   })
-  console.log({args})
+  // console.log({args})
   return args
 }
