@@ -32,6 +32,8 @@ const fs = require('fs')
 //   }
 // }
 
+let scoreSplitor = [',', '，', '。', '；', ':', '/']
+
 let scoring = function (annotations) {
   let lines = annotations.trim().split('\n').map(line => line.trim()).filter(line => (line !== ''))
 
@@ -56,7 +58,24 @@ let scoring = function (annotations) {
         if (p.indexOf(' ') > -1) {
           p = p.slice(0, p.indexOf(' '))
         }
-        return Number(p.trim())
+        p = p.trim()
+        let result = Number(p)
+        // return Number(p.trim())
+        if (!isNaN(result)) {
+          return result
+        }
+        
+        for (let i = 0; i < scoreSplitor.length; i++) {
+          let splitor = scoreSplitor[i]
+          if (p.indexOf(splitor) > -1) {
+            let result = p.slice(0, p.indexOf(splitor)).trim()
+            result = Number(result)
+            if (!isNaN(result)) {
+              return result
+            }
+          }
+        }
+        return result
       })
       let q = parts[0]
       let score = parts[1]
