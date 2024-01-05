@@ -55,6 +55,10 @@ let scoring = function (annotations) {
     else if (line.startsWith('q') && line.indexOf('.') > -1 && id !== null) {
       let parts = line.slice(1).split('.').map(p => {
         p = p.trim()
+        if (p === '') {
+          return NaN
+        }
+
         if (p.indexOf(' ') > -1) {
           p = p.slice(0, p.indexOf(' '))
         }
