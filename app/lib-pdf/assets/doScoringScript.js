@@ -55,6 +55,34 @@ main = async function () {
 
         await sleep(5000)
 
+        let scoreInput = $(`.input-score input`)
+        while (scoreInput.val().trim().length === 0 || Number(scoreInput.val()) !== Number(score + '')) {
+            //scoreInput.val(score).change().blur()
+            scoreInput.val(score)
+
+            scoreInput[0].dispatchEvent(eventInput)
+            await sleep(500)
+
+            scoreInput[0].dispatchEvent(eventChange)
+
+            //let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
+            //giveScoreButtonFile.click()
+            await sleep(1000)
+        }
+
+        let commentInput = $(`.ivu-input-type-textarea textarea`)
+        while (commentInput.val().trim() !== (comment + '').trim()) {
+            commentInput.val(comment)
+
+            commentInput[0].dispatchEvent(eventInput)
+            await sleep(500)
+
+            commentInput[0].dispatchEvent(eventChange)
+            await sleep(1000)
+        }
+
+        // ------------
+        
         // --------------
         // 單一人的狀態
 
@@ -162,33 +190,6 @@ main = async function () {
         }   // if (prependFilename) {
         // --------------------
 
-        let scoreInput = $(`.input-score input`)
-        while (scoreInput.val().trim().length === 0 || Number(scoreInput.val()) !== Number(score + '')) {
-            //scoreInput.val(score).change().blur()
-            scoreInput.val(score)
-
-            scoreInput[0].dispatchEvent(eventInput)
-            await sleep(500)
-
-            scoreInput[0].dispatchEvent(eventChange)
-
-            //let giveScoreButtonFile = $(`#give-score:visible:first .popup-content:visible:first .popup-footer:visible:first button.button-green:visible:first`)
-            //giveScoreButtonFile.click()
-            await sleep(1000)
-        }
-
-        let commentInput = $(`.ivu-input-type-textarea textarea`)
-        while (commentInput.val().trim() !== (comment + '').trim()) {
-            commentInput.val(comment)
-
-            commentInput[0].dispatchEvent(eventInput)
-            await sleep(500)
-
-            commentInput[0].dispatchEvent(eventChange)
-            await sleep(1000)
-        }
-
-        // ------------
         // let scoreInput = $(`#give-score:visible:first .popup-content:visible:first .score-box input[name="score"]`)
         //scoreInput.val(score).change().blur()
         // scoreInput[0].dispatchEvent(eventChange)
