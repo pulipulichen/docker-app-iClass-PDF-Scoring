@@ -49,6 +49,10 @@ let processPDF = async function (file) {
   fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_plus-adj-total.js'), plusAdjTotalJS, 'utf-8')
   fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_test.js'), testJS, 'utf-8')
 
+  fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_ratio110.js'), ratio110JS, 'utf-8')
+  fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_ratio120.js'), ratio120JS, 'utf-8')
+  fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_ratio130.js'), ratio130JS, 'utf-8')
+
   // -----------------
 
   if (fs.existsSync(path.resolve('/output/', fileNameWithoutExt)) === false) {
