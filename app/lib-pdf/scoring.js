@@ -185,10 +185,6 @@ let scoring = function (annotations) {
     line.push(adjTotal)
     adjTotalList.push(adjTotal)
 
-    let plusAdjTotal = parseInt(Math.sqrt(adjTotal)*10)
-    line.push(plusAdjTotal)
-    plusAdjTotalList.push(plusAdjTotal)
-
     ratio110AdjTotalList.push(calcAdjTotal(total, 1.1))
     line.push(calcAdjTotal(total, 1.1))
 
@@ -197,6 +193,10 @@ let scoring = function (annotations) {
 
     ratio130AdjTotalList.push(calcAdjTotal(total, 1.3))
     line.push(calcAdjTotal(total, 1.3))
+
+    let plusAdjTotal = parseInt(Math.sqrt(adjTotal)*10)
+    line.push(plusAdjTotal)
+    plusAdjTotalList.push(plusAdjTotal)
 
     line = line.concat(scores)
     line.push(comments.join(' / '))
