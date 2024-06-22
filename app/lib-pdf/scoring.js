@@ -190,8 +190,13 @@ let scoring = function (annotations) {
     plusAdjTotalList.push(plusAdjTotal)
 
     ratio110AdjTotalList.push(calcAdjTotal(total, 1.1))
+    line.push(calcAdjTotal(total, 1.1))
+
     ratio120AdjTotalList.push(calcAdjTotal(total, 1.2))
+    line.push(calcAdjTotal(total, 1.2))
+
     ratio130AdjTotalList.push(calcAdjTotal(total, 1.3))
+    line.push(calcAdjTotal(total, 1.3))
 
     line = line.concat(scores)
     line.push(comments.join(' / '))
