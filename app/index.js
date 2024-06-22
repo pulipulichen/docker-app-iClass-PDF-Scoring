@@ -43,7 +43,7 @@ let processPDF = async function (file) {
 
   // -----------------
 
-  let {adjTotalJS, plusAdjTotalJS, testJS} = GeneralScoreScript(idTotalList, fileNameWithoutExt)
+  let {adjTotalJS, plusAdjTotalJS, testJS, ratio110JS, ratio120JS, ratio130JS} = GeneralScoreScript(idTotalList, fileNameWithoutExt)
 
   fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_adj-total.js'), adjTotalJS, 'utf-8')
   fs.writeFileSync(path.resolve('/output/', fileNameWithoutExt + '_plus-adj-total.js'), plusAdjTotalJS, 'utf-8')
