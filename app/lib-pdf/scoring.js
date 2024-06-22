@@ -261,9 +261,9 @@ let scoring = function (annotations) {
   
 
   output.push('')
-  output.push(['average'].concat([avgTotalList, avgAdjTotalList, avgPlusTotalList, avgRatio110AdjTotalList, avgRatio120AdjTotalList, avgRatio130AdjTotalList]).concat(scoreArrayAvg).join(','))
-  output.push(['max'].concat([maxTotalList, maxAdjTotalList, maxPlusTotalList, maxRatio110AdjTotalList, maxRatio120AdjTotalList, maxRatio130AdjTotalList]).concat(scoreArrayMax).join(','))
-  output.push(['percent'].concat([percentTotalList, percentAdjTotalList, percentPlusTotalList, percentRatio110AdjTotalList, percentRatio120AdjTotalList, percentRatio130AdjTotalList]).concat(scoreArrayPercent).join(','))
+  output.push(['average'].concat([avgTotalList, avgAdjTotalList, avgRatio110AdjTotalList, avgRatio120AdjTotalList, avgRatio130AdjTotalList, avgPlusTotalList]).concat(scoreArrayAvg).join(','))
+  output.push(['max'].concat([maxTotalList, maxAdjTotalList, maxRatio110AdjTotalList, maxRatio120AdjTotalList, maxRatio130AdjTotalList, maxPlusTotalList]).concat(scoreArrayMax).join(','))
+  output.push(['percent'].concat([percentTotalList, percentAdjTotalList, percentRatio110AdjTotalList, percentRatio120AdjTotalList, percentRatio130AdjTotalList, percentPlusTotalList]).concat(scoreArrayPercent).join(','))
 
   let passTotalCount = Math.round(totalList.filter(s => s >= 60).length / totalList.length * 100) + '%'
   let passAdjTotalCount = Math.round(adjTotalList.filter(s => s >= 60).length / adjTotalList.length * 100)  + '%'
@@ -277,7 +277,7 @@ let scoring = function (annotations) {
   // let passPlusAdjTotaCount = plusAdjTotalList.filter(s => s >= 60).length
 
   output.push('')
-  output.push(['passed percent'].concat([passTotalCount, passAdjTotalCount, passPlusAdjTotalCount, passRatio110AdjTotalCount, passRatio120AdjTotalCount, passRatio130AdjTotalCount]))
+  output.push(['passed percent'].concat([passTotalCount, passAdjTotalCount, passRatio110AdjTotalCount, passRatio120AdjTotalCount, passRatio130AdjTotalCount, passPlusAdjTotalCount]))
 
   // -------------------
 
