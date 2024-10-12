@@ -47,4 +47,10 @@ let main = async function () {
   }
 }
 
-main()
+async function main2() {
+  await main()
+  await main()
+}
+
+main2()
+
